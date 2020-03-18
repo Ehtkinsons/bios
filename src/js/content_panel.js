@@ -9,56 +9,45 @@ const MainPage = require('./pages/main/index.js');
 const LinkPage = require('./pages/link_page/index.js');
 
 class ContentPanel {
-  constructor() {
-    this.hash = Pages.detectCurrentPage();
+  constructor(data) {
+    this.pages = new Pages(data);
+    this.hash = this.pages.detectCurrentPage();
+    this.data = data;
+  }
+
+  buildContent() {
+    $('#content').append(`<section id="main"></section>`);
+
+    for (const linkGroup of this.data.linkGroups) {
+      $('#content').append(`<section id="${linkGroup.name}"></section>`);
+    }
   }
 
   updateVisibility() {
-    $(`.${Pages.PAGES.join(', .')}`).removeClass('focus');
+    $(`#nav`).children().removeClass('focus');
     $(`.${this.hash}`).addClass('focus');
   }
 
-  updatePage() {
-    this.updateVisibility();
-  }
-
   setUpHashListener() {
-    return $(window).on('hashchange', () => {
-      this.hash = Pages.detectCurrentPage();
-      this.updatePage();
+    $(window).on('hashchange', () => {
+      this.hash = this.pages.detectCurrentPage();
+      this.updateVisibility();
+
     });
+
+    // Hack to make the content panel load :target CSS.
+    window.location.hash = this.hash;
   }
 
   bootstrap() {
-    this.setUpHashListener();
-    this.updatePage();
+    this.buildContent();
 
-    const linkGroups = [
-      {
-        "name": "Work",
-        "links": [
-          ['http://canvas.ust.hk/', 'Canvas'],
-          ['http://outlook.com/', 'Outlook'],
-          ['http://o365.ust.hk/', 'HKUST Email'],
-          ['http://mail.ck2ustudio.com/', 'Ck2uStudio Email'],
-          ['https://github.com/tommyku', 'GitHub']
-        ],
-      },
-      {
-        "name": "Fun",
-        "links": [
-          ['http://reddit.com/', 'Reddit'],
-          ['http://www.nicovideo.jp', 'NicoNico'],
-          ['https://youtube.com', 'YouTube'],
-          ['http://share.dmhy.org/', 'DMHY'],
-          ['http://www.bilibili.com/', 'bilibili']
-        ]
-      }
-    ];
+    this.setUpHashListener();
+    this.updateVisibility();
 
     (new MainPage).render();
 
-    for (const linkGroup of linkGroups) {
+    for (const linkGroup of this.data.linkGroups) {
       (new LinkPage(linkGroup.name, linkGroup.links)).render();
     }
   }

@@ -3,23 +3,33 @@ const Pages = require('./pages.js');
 
 // would've been much easier if we had React
 class Navigation {
-  constructor() {
-    this.pageCount = Pages.PAGES.length;
+  constructor(data) {
+    this.pages = new Pages(data);
+    this.pageCount = this.pages.pages.length;
+    this.data = data;
   }
 
   getCurrentPagePosition() {
-    const pageHash = Pages.detectCurrentPage();
-    return Pages.PAGES.indexOf(pageHash);
+    const pageHash = this.pages.detectCurrentPage();
+    return this.pages.pages.indexOf(pageHash);
   }
 
   goToNextPage() {
     const nextPagePosition = (this.getCurrentPagePosition()+1) % this.pageCount;
-    window.location.hash = Pages.PAGES[nextPagePosition];
+    window.location.hash = this.pages.pages[nextPagePosition];
   }
 
   goToPreviousPage() {
     const previousPagePosition = ((this.getCurrentPagePosition()-1)+this.pageCount) % this.pageCount;
-    window.location.hash = Pages.PAGES[previousPagePosition];
+    window.location.hash = this.pages.pages[previousPagePosition];
+  }
+
+  buildNav() {
+    $('#nav').append(`<li class="main"><a href="#main">Main</a></li>`);
+
+    for (const linkGroup of this.data.linkGroups) {
+      $('#nav').append(`<li class="${linkGroup.name}"><a href="#${linkGroup.name}">${linkGroup.name}</a></li>`);
+    }
   }
 
   setUpNavNavigation() {
@@ -42,7 +52,7 @@ class Navigation {
 
   goToPreviousElement() {
     let $prevFocus;
-    const pageHash = Pages.detectCurrentPage();
+    const pageHash = this.pages.detectCurrentPage();
     const $contentSection = $(`section#${pageHash}`);
     const $currentFocus = $contentSection.children('.focus');
     if ($currentFocus[0] != null) {
@@ -59,7 +69,7 @@ class Navigation {
 
   goToNextElement() {
     let $nextFocus;
-    const pageHash = Pages.detectCurrentPage();
+    const pageHash = this.pages.detectCurrentPage();
     const $contentSection = $(`section#${pageHash}`);
     const $currentFocus = $contentSection.children('.focus');
     if ($currentFocus[0] != null) {
@@ -75,6 +85,7 @@ class Navigation {
   }
 
   bootstrap() {
+    this.buildNav();
     this.setUpNavNavigation();
     this.setUpLinkNavigation();
   }

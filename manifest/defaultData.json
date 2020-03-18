@@ -1,0 +1,72 @@
+{
+  "linkGroups": [
+    {
+      "name": "work",
+      "links": [
+        {
+          "name": "Google",
+          "url": "https://google.com"
+        },
+        {
+          "name": "Gmail",
+          "url": "https://mail.google.com/mail"
+        },
+        {
+          "name": "Docs",
+          "url": "https://docs.google.com"
+        }
+      ]
+    },
+    {
+      "name": "prog",
+      "links": [
+        {
+          "name": "StackOverflow",
+          "url": "https://stackoverflow.com"
+        },
+        {
+          "name": "GitHub",
+          "url": "https://github.com"
+        }
+      ]
+    },
+    {
+      "name": "fun",
+      "links": [
+        {
+          "name": "YouTube",
+          "url": "https://youtube.com"
+        },
+        {
+          "name": "Reddit",
+          "url": "https://reddit.com"
+        },
+        {
+          "name": "Netflix",
+          "url": "https://netflix.com"
+        },
+        {
+          "name": "Spotify",
+          "url": "https://open.spotify.com"
+        }
+      ]
+    },
+    {
+      "name": "social",
+      "links": [
+        {
+          "name": "Facebook",
+          "url": "https://facebook.com"
+        },
+        {
+          "name": "Instagram",
+          "url": "https://instagram.com"
+        },
+        {
+          "name": "Twitter",
+          "url": "https://twitter.com"
+        }
+      ]
+    }
+  ]
+}

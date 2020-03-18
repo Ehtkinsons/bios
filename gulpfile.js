@@ -1,10 +1,8 @@
 var gulp = require('gulp');
-var pug  = require('gulp-pug');
 var webpack = require('webpack');
 
 gulp.task('html', function() {
-  gulp.src(['src/html/**/*.pug'])
-      .pipe(pug({pretty: true}))
+  gulp.src(['src/html/**/*.html'])
       .pipe(gulp.dest('output'));
 });
 
@@ -28,7 +26,7 @@ gulp.task('static', function() {
 gulp.task('build', ['html', 'webpack', 'static']);
 
 gulp.task('watch', function() {
-  gulp.watch("src/html/**/*.pug", ['html']);
+  gulp.watch("src/html/**/*.html", ['html']);
   gulp.watch("src/js/**/*.js", ['webpack']);
 });
 

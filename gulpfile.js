@@ -29,6 +29,7 @@ gulp.task('build', ['html', 'webpack', 'static']);
 
 gulp.task('watch', function() {
   gulp.watch("src/html/**/*.pug", ['html']);
+  gulp.watch("src/js/**/*.js.coffee", ['webpack']);
 });
 
 gulp.task('default', ['build', 'watch'], function() {

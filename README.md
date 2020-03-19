@@ -8,8 +8,7 @@ A start page that looks like BIOS screen.
 
 ## Getting Started
 
-The page can be built locally. If you just want the generated HTML file,
-see the `/demo` folder.
+The page can be built locally.
 
 ### Prerequisite
 

@@ -2,7 +2,6 @@
     "version": "1.0.0",
     "name": "Bios",
     "slug": "bios",
-    "outputDir": "output",
     "author": {
         "name": "tommyku",
         "link": "https://github.com/tommyku/start-page-bios"
